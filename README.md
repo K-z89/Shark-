@@ -242,7 +242,7 @@ curl -X POST "http://localhost:8000/download" \
 ## تماس و پشتیبانی
 - توسعه‌دهنده: K-z89  
   
-- مخزن: -https://github.com/K-z89/SHARK
+- مخزن: https://github.com/K-z89/SHARK
 
 ---
 
