@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SHARK Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .stat-box { background: #2c3e50; color: white; padding: 20px; border-radius: 10px; }
+        .log { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🦈 SHARK Admin Panel</h1>
+    
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Total Requests</h3>
+            <p id="total">0</p>
+        </div>
+        <div class="stat-box">
+            <h3>Success Rate</h3>
+            <p id="success">0%</p>
+        </div>
+        <div class="stat-box">
+            <h3>Active</h3>
+            <p id="active">Yes</p>
+        </div>
+    </div>
+    
+    <div class="log">
+        <h3>Recent Activity</h3>
+        <div id="activity"></div>
+    </div>
+    
+    <script>
+        async function loadStats() {
+            try {
+                const res = await fetch('http://localhost:8000/stats');
+                const data = await res.json();
+                
+                document.getElementById('total').textContent = data.total || 0;
+                document.getElementById('success').textContent = 
+                    data.total ? ((data.success / data.total) * 100).toFixed(1) + '%' : '0%';
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        
+        setInterval(loadStats, 5000);
+        loadStats();
+    </script>
+</body>
+</html>
